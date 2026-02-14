@@ -6,30 +6,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>biografia sebo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Container para os botões e galeria */
+        .galeria-biografia {
+            position: relative;
+            max-width: 1250px;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        #galeria {
+            display: flex;
+            gap: 25px;
+            overflow-x: hidden; /* Esconde a barra para focar nos botões */
+            scroll-behavior: smooth;
+            padding: 20px 5px;
+        }
+
+        #galeria img {
+            height: 380px; /* Um pouco mais alto para dar imponência */
+            flex-shrink: 0;
+            border-radius: 8px; /* Cantos mais retos para seriedade */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        #galeria img:hover {
+            transform: scale(1.03);
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Botões Estilo Biografia (Elegante e Clássico) */
+        .btn-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border: 1px solid #d4af37; /* Borda dourada */
+            border-radius: 50%;
+            background: #1a2a3a; /* Azul Marinho Profundo */
+            color: #d4af37; /* Dourado */
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover com degradê dourado/creme */
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #f9f1c0 100%);
+            color: #1a2a3a;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-prev { left: 0; }
+        .btn-next { right: 0; }
+
+        /* Estilo do botão de compra para combinar com biografia */
+        .btn-manga-style {
+            background-color: #1a2a3a !important;
+            border: 2px solid #d4af37 !important;
+            color: #d4af37 !important;
+            padding: 12px 25px;
+            border-radius: 5px !important;
+            transition: 0.3s;
+        }
+
+        .btn-manga-style:hover {
+            background-color: #d4af37 !important;
+            color: #1a2a3a !important;
+        }
+    </style>
 </head>
 <body>
-    <div class="admin-banner">
-    <div class="admin-content">
-        <h1>Grandes Trajetórias</h1>
-        <p class="admin-description">
-            Mergulhe nas vidas que moldaram a história. De líderes visionários a artistas revolucionários, explore relatos autênticos de superação e legado. O acervo definitivo para quem busca inspiração em fatos reais.
-        </p>
-    </div>
+
+<div class="header-container">
+    <h1>Seja bem-vindo</h1>
+    <h2 class="imagem-rotativa">
+        <span>ao espaço biografia</span>
+    </h2>
 </div>
-<div class="imgg" id="galeria">
-            <img src="livro1.png" alt="">
-            <img src="livro2.png" alt="">
-            <img src="livro3.png" alt="">
-            <img src="livro5.png" alt="">
-            <img src="livro6.png" alt="">
-            <img src="livro7.png" alt="">
-        </div>
-        <div class="compra-manga">
+
+<div class="galeria-biografia">
+    <button class="btn-nav btn-prev" onclick="rolar(-1)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+
+    <div class="imgg" id="galeria">
+        <img src="livro1.png" alt="Biografia 1">
+        <img src="livro2.png" alt="Biografia 2">
+        <img src="livro3.png" alt="Biografia 3">
+        <img src="livro5.png" alt="Biografia 4">
+        <img src="livro6.png" alt="Biografia 5">
+        <img src="livro7.png" alt="Biografia 6">
+    </div>
+
+    <button class="btn-nav btn-next" onclick="rolar(1)">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+</div>
+
+<div class="compra-manga">
     <h1>📚 Pronto para conhecer essas histórias reais?</h1>
     <p>Adicione biografias inspiradoras e trajetórias marcantes à sua biblioteca pessoal.</p>
     <a href="https://sebo-so-ler.base44.app/" class="btn-manga-style">
         Explorar Biografias <span class="seta-manga">→</span>
     </a>
 </div>
+
+<script>
+    function rolar(direcao) {
+        const galeria = document.getElementById('galeria');
+        const scrollAmount = 350; // Quantidade do deslize
+        galeria.scrollBy({
+            left: direcao * scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+</script>
+
 </body>
 </html>
