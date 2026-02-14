@@ -1,30 +1,35 @@
-/* --- 1. CONFIGURAÇÕES GERAIS (ESTILO ACERVO) --- */
+/* --- 1. CONFIGURAÇÕES GERAIS --- */
 body {
-    background-color: #fdfbf7; /* Tom de papel creme de alta qualidade */
+    /* Fundo em off-white para reduzir o cansaço visual */
+    background-color: #faf9f6; 
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Playfair Display', serif; /* Fonte clássica para títulos e corpo */
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Detalhe de iluminação suave para profundidade */
+/* Detalhe de iluminação de fundo - Tom pêssego suave para acolhimento */
 body::before {
     content: "";
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100vh;
-    background: radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.05) 0%, transparent 80%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.15) 0%, transparent 60%);
     pointer-events: none;
     z-index: -1;
 }
 
-/* --- 2. BANNER RESPONSIVO (ESTILO EDIÇÃO DE LUXO) --- */
+/* --- 2. BANNER RESPONSIVO --- */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 60px 10%;
-    background: radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.05) 0%, transparent 80%);
+    background-color: #fdfbf7;
 }
 
 .header-container h1 {
@@ -63,7 +68,7 @@ body::before {
     position: absolute;
     width: 150px; 
     height: 150px;
-    background-image: url('icone\ sebo\ .WebP'); /* Insira sua imagem aqui */
+    background-image: url('icone\ sebo\ .png'); /* Insira sua imagem aqui */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -93,157 +98,158 @@ body::before {
     }
 }
 
-/* --- 3. CARROSSEL (GALERIA DE OBRAS) --- */
+/* --- 3. CARROSSEL --- */
+.imgg img {
+    flex: 0 0 240px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 25px !important;
+    /* Sombra mais suave, menos "pesada" */
+    box-shadow: 0 10px 20px rgba(45, 74, 62, 0.1); 
+    transition: all 0.4s ease;
+    cursor: pointer;
+    scroll-snap-align: center;
+    /* Filtro leve para deixar as imagens em harmonia */
+    filter: sepia(10%) contrast(95%);
+}
+
+.imgg img:hover { 
+    transform: translateY(-10px); 
+    filter: sepia(0%) contrast(100%);
+}
+
+/* --- 4. SETAS --- */
+.seta-decorativa {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    /* Marrom terracota suave */
+    color: rgba(142, 125, 108, 0.4);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* --- 5. GRID DE BOTÕES (Sugestão de cor para os botões) --- */
+/* Adicione esta classe se quiser que os botões sigam o estilo */
+.botao-autoajuda {
+    background-color: #8e7d6c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    transition: background 0.3s;
+}
+
+.botao-autoajuda:hover {
+    background-color: #2d4a3e;
+}
+/* --- 3. CARROSSEL (SCROLL HORIZONTAL RESTAURADO) --- */
 .carrossel-wrapper {
     position: relative;
     width: 100%;
     max-width: 1300px;
-    margin: 40px auto;
+    margin: 0 auto;
 }
 
 .imgg {
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto; /* Habilita o arrastar/scroll */
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    gap: 30px;
-    padding: 30px 50px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    gap: 20px;
+    padding: 20px 50px;
+    
+    /* Esconde a barra de rolagem mas mantém a função */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
 }
 
-.imgg::-webkit-scrollbar { display: none; }
+.imgg::-webkit-scrollbar { 
+    display: none; /* Chrome/Safari */
+}
 
 .imgg img {
-    flex: 0 0 240px;
-    height: 340px;
+    flex: 0 0 240px; /* Mantém o tamanho fixo para permitir o scroll */
+    height: 320px;
     object-fit: cover;
-    border-radius: 4px !important; /* Capas de livros são retangulares */
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15); 
-    transition: all 0.4s ease;
+    border-radius: 25px !important;
+    box-shadow: 0 10px 20px rgba(45, 74, 62, 0.1); 
+    transition: transform 0.4s ease, filter 0.4s ease;
     cursor: pointer;
     scroll-snap-align: center;
-    border: 1px solid rgba(0,0,0,0.1);
+    filter: sepia(10%) contrast(95%);
 }
 
 .imgg img:hover { 
-    transform: translateY(-15px) scale(1.03);
-    box-shadow: 15px 25px 35px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); 
+    filter: sepia(0%) contrast(100%);
 }
 
-/* --- 4. SETAS (ELEGÂNCIA DISCRETA) --- */
+/* --- 4. SETAS SOBRE AS IMAGENS (RESTAURADAS) --- */
 .seta-decorativa {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     font-size: 3rem;
-    color: #2c2c2c;
+    color: rgba(142, 125, 108, 0.5); /* Cor terracota suave */
     z-index: 10;
     pointer-events: none;
-    opacity: 0.6;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-.seta-esq { left: 15px; animation: moverEsq 2.5s infinite ease-in-out; }
-.seta-dir { right: 15px; animation: moverDir 2.5s infinite ease-in-out; }
+.seta-esq { left: 10px; animation: moverEsq 1.5s infinite ease-in-out; }
+.seta-dir { right: 10px; animation: moverDir 1.5s infinite ease-in-out; }
 
 @keyframes moverEsq {
-    0%, 100% { transform: translate(0, -50%); }
-    50% { transform: translate(-10px, -50%); }
+    0%, 100% { transform: translate(0, -50%); opacity: 0.3; }
+    50% { transform: translate(-10px, -50%); opacity: 0.8; }
 }
 
 @keyframes moverDir {
-    0%, 100% { transform: translate(0, -50%); }
-    50% { transform: translate(10px, -50%); }
+    0%, 100% { transform: translate(0, -50%); opacity: 0.3; }
+    50% { transform: translate(10px, -50%); opacity: 0.8; }
 }
-
-/* --- 5. GRID DE BOTÕES --- */
-.botoes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 25px;
-    padding: 40px 5%;
-    max-width: 1100px;
+/* --- 7. SEÇÃO DE CHAMADA PARA AÇÃO (COMPRA) --- */
+.compra {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
-/* --- 6. SEÇÃO DE CHAMADA BIOGRÁFICA --- */
-.compra-manga { /* Mantive a classe para seu HTML funcionar */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 20px;
-    background: #ffffff;
-    border-top: 1px solid #eee;
-    margin-top: 40px;
+.compra h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: #2d4a3e; /* Verde escuro (o mesmo do banner) */
+    margin-bottom: 30px;
+    line-height: 1.4;
 }
 
-.compra-manga h1 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    color: #1a1a1a;
-    margin-bottom: 15px;
-}
-
-.compra-manga p {
-    font-family: 'SF Pro Display', sans-serif;
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 40px;
-    max-width: 700px;
-}
-
-.btn-manga-style {
+.btn-autoajuda {
     display: inline-block;
-    padding: 20px 60px;
-    background: #1a1a1a;
-    color: #d4a373 !important; /* Texto em dourado no fundo preto */
+    padding: 18px 45px;
+    background-color: #8e7d6c; /* Terracota suave */
+    color: #ffffff !important;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    border-radius: 0; /* Totalmente quadrado para ser clássico */
+    border-radius: 50px; /* Botão arredondado traz sensação de suavidade */
+    box-shadow: 0 10px 20px rgba(142, 125, 108, 0.2);
     transition: all 0.3s ease;
-    border: 1px solid #d4a373;
-    cursor: pointer;
+    border: 2px solid transparent;
 }
 
-.btn-manga-style:hover {
-    background: #d4a373;
-    color: #fff !important;
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(212, 163, 115, 0.3);
+.btn-autoajuda:hover {
+    background-color: #2d4a3e; /* Muda para o verde ao passar o mouse */
+    transform: translateY(-3px); /* Leve flutuação */
+    box-shadow: 0 15px 30px rgba(45, 74, 62, 0.3);
 }
 
-.btn-manga-style:active {
-    transform: translateY(0);
-}
-
-/* --- 7. AJUSTES MOBILE --- */
-@media (max-width: 768px) {
-    .admin-banner {
-        width: 95%;
-        padding: 40px 25px;
-        border-radius: 4px;
-        border-left: 6px solid #d4a373;
-    }
-
-    .admin-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .imgg img {
-        flex: 0 0 180px;
-        height: 260px;
-    }
-
-    .seta-decorativa { display: none; }
-    
-    .btn-manga-style {
-        padding: 15px 30px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+.btn-autoajuda:active {
+    transform: translateY(-1px);
 }
