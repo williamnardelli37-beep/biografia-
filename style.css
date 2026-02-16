@@ -1,255 +1,200 @@
-/* --- 1. CONFIGURAÇÕES GERAIS --- */
+/* --- 1. CONFIGURAÇÕES GERAIS (ESTILO ACERVO) --- */
 body {
-    /* Fundo em off-white para reduzir o cansaço visual */
-    background-color: #faf9f6; 
+    background-color: #fdfbf7; /* Tom de papel creme de alta qualidade */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Playfair Display', serif;
 }
 
-/* Detalhe de iluminação de fundo - Tom pêssego suave para acolhimento */
+/* Detalhe de iluminação suave para profundidade */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.15) 0%, transparent 60%);
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.05) 0%, transparent 80%);
     pointer-events: none;
     z-index: -1;
 }
 
-/* --- 2. BANNER RESPONSIVO --- */
+/* --- 2. BANNER RESPONSIVO (ESTILO EDIÇÃO DE LUXO) --- */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 60px 10%;
-    background-color: #fdfbf7;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.05) 0%, transparent 80%);
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .header-container h1 {
-    font-family: 'Playfair Display', serif;
     font-size: clamp(2.2rem, 6vw, 3.8rem);
     color: #2c1e14;
     margin: 0;
 }
 
-.header-container h2 {
+.header-container h2.imagem-rotativa {
     font-family: 'Roboto', sans-serif;
     font-size: clamp(1rem, 3vw, 1.8rem);
     color: #8b4513;
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin: 0;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 380px; /* Largura mínima para o texto não quebrar */
-    height: 160px;    /* Altura para a imagem quadrada */
+    min-width: 300px;
+    height: 150px;
 }
 
-/* Estilo do TEXTO */
 .header-container h2 span {
     position: absolute;
     white-space: nowrap;
     animation: blurCiclo 4.0s infinite ease-in-out;
 }
 
-/* Estilo da IMAGEM (Quadrada) */
 .header-container h2::after {
     content: "";
     position: absolute;
-    width: 150px; 
-    height: 150px;
-    background-image: url('icone\ sebo\ .png'); /* Insira sua imagem aqui */
+    width: 130px; 
+    height: 130px;
+    background-image: url('icone\ sebo\ .WebP');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     border-radius: 20px;
     opacity: 0;
     filter: blur(15px);
-    /* A animação da imagem é a mesma, mas atrasada em 2 segundos (metade do ciclo) */
     animation: blurCiclo 4.0s infinite ease-in-out 2.0s;
 }
 
-/* ANIMAÇÃO DE DESFOQUE (Entrada, Pausa, Saída) */
 @keyframes blurCiclo {
-    0% {
-        opacity: 0;
-        filter: blur(15px);
-        transform: scale(0.95);
-    }
-    10%, 40% {
-        opacity: 1;
-        filter: blur(0px); /* Totalmente nítido por 2 segundos */
-        transform: scale(1);
-    }
-    50%, 100% {
-        opacity: 0;
-        filter: blur(15px);
-        transform: scale(0.95);
-    }
+    0%, 100% { opacity: 0; filter: blur(10px); transform: scale(0.95); }
+    10%, 40% { opacity: 1; filter: blur(0px); transform: scale(1); }
 }
 
-/* --- 3. CARROSSEL --- */
-.imgg img {
-    flex: 0 0 240px;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 25px !important;
-    /* Sombra mais suave, menos "pesada" */
-    box-shadow: 0 10px 20px rgba(45, 74, 62, 0.1); 
+/* --- 3. ESTRUTURA DA GALERIA E BOTÕES --- */
+.galeria-wrapper {
+    position: relative;
+    width: 95%;
+    max-width: 1300px;
+    margin: 40px auto;
+    display: flex;
+    align-items: center;
+}
+
+#galeria {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; /* Safari Mac/iOS */
+}
+
+#galeria::-webkit-scrollbar { display: none; }
+
+#galeria img {
+    flex: 0 0 auto;
+    height: 380px; /* Altura clássica para biografias */
+    border-radius: 4px; /* Cantos retos para sobriedade */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.4s ease;
     cursor: pointer;
-    scroll-snap-align: center;
-    /* Filtro leve para deixar as imagens em harmonia */
-    filter: sepia(10%) contrast(95%);
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-user-drag: none;
 }
 
-.imgg img:hover { 
-    transform: translateY(-10px); 
-    filter: sepia(0%) contrast(100%);
+#galeria img:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 15px 25px 35px rgba(0, 0, 0, 0.2);
 }
 
-/* --- 4. SETAS --- */
-.seta-decorativa {
+/* --- 4. BOTÕES MODERNOS DE BIOGRAFIA --- */
+.btn-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2.5rem;
-    /* Marrom terracota suave */
-    color: rgba(142, 125, 108, 0.4);
-    z-index: 10;
-    pointer-events: none;
-}
-
-/* --- 5. GRID DE BOTÕES (Sugestão de cor para os botões) --- */
-/* Adicione esta classe se quiser que os botões sigam o estilo */
-.botao-autoajuda {
-    background-color: #8e7d6c;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 20px;
-    transition: background 0.3s;
-}
-
-.botao-autoajuda:hover {
-    background-color: #2d4a3e;
-}
-/* --- 3. CARROSSEL (SCROLL HORIZONTAL RESTAURADO) --- */
-.carrossel-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-.imgg {
-    display: flex;
-    overflow-x: auto; /* Habilita o arrastar/scroll */
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    gap: 20px;
-    padding: 20px 50px;
-    
-    /* Esconde a barra de rolagem mas mantém a função */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-}
-
-.imgg::-webkit-scrollbar { 
-    display: none; /* Chrome/Safari */
-}
-
-.imgg img {
-    flex: 0 0 240px; /* Mantém o tamanho fixo para permitir o scroll */
-    height: 320px;
-    object-fit: cover;
-    border-radius: 25px !important;
-    box-shadow: 0 10px 20px rgba(45, 74, 62, 0.1); 
-    transition: transform 0.4s ease, filter 0.4s ease;
+    width: 55px;
+    height: 55px;
+    border: 1px solid #d4a373; /* Borda dourada clássica */
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.85); /* Fundo escuro elegante */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #d4a373;
+    font-size: 1.5rem;
     cursor: pointer;
-    scroll-snap-align: center;
-    filter: sepia(10%) contrast(95%);
-}
-
-.imgg img:hover { 
-    transform: scale(1.05); 
-    filter: sepia(0%) contrast(100%);
-}
-
-/* --- 4. SETAS SOBRE AS IMAGENS (RESTAURADAS) --- */
-.seta-decorativa {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 3rem;
-    color: rgba(142, 125, 108, 0.5); /* Cor terracota suave */
     z-index: 10;
-    pointer-events: none;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
 }
 
-.seta-esq { left: 10px; animation: moverEsq 1.5s infinite ease-in-out; }
-.seta-dir { right: 10px; animation: moverDir 1.5s infinite ease-in-out; }
-
-@keyframes moverEsq {
-    0%, 100% { transform: translate(0, -50%); opacity: 0.3; }
-    50% { transform: translate(-10px, -50%); opacity: 0.8; }
+.btn-nav:hover {
+    background: linear-gradient(135deg, #d4a373 0%, #fdfbf7 100%);
+    color: #1a1a1a;
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.5);
+    transform: translateY(-50%) scale(1.1);
 }
 
-@keyframes moverDir {
-    0%, 100% { transform: translate(0, -50%); opacity: 0.3; }
-    50% { transform: translate(10px, -50%); opacity: 0.8; }
-}
-/* --- 7. SEÇÃO DE CHAMADA PARA AÇÃO (COMPRA) --- */
-.compra {
+.btn-prev { left: -20px; }
+.btn-next { right: -20px; }
+
+/* --- 5. SEÇÃO DE CHAMADA BIOGRÁFICA --- */
+.compra-manga {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 60px 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 80px 20px;
+    background: #ffffff;
+    border-top: 1px solid #eee;
 }
 
-.compra h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    color: #2d4a3e; /* Verde escuro (o mesmo do banner) */
-    margin-bottom: 30px;
-    line-height: 1.4;
-}
-
-.btn-autoajuda {
+.btn-manga-style {
     display: inline-block;
-    padding: 18px 45px;
-    background-color: #8e7d6c; /* Terracota suave */
-    color: #ffffff !important;
+    padding: 20px 60px;
+    background: #1a1a1a;
+    color: #d4a373 !important;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.1rem;
-    border-radius: 50px; /* Botão arredondado traz sensação de suavidade */
-    box-shadow: 0 10px 20px rgba(142, 125, 108, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-radius: 0; /* Quadrado clássico */
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 1px solid #d4a373;
+    cursor: pointer;
 }
 
-.btn-autoajuda:hover {
-    background-color: #2d4a3e; /* Muda para o verde ao passar o mouse */
-    transform: translateY(-3px); /* Leve flutuação */
-    box-shadow: 0 15px 30px rgba(45, 74, 62, 0.3);
+.btn-manga-style:hover {
+    background: #d4a373;
+    color: #fff !important;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212, 163, 115, 0.3);
 }
 
-.btn-autoajuda:active {
-    transform: translateY(-1px);
+/* --- 6. AJUSTES MOBILE --- */
+@media (max-width: 768px) {
+    .header-container { padding: 40px 5%; justify-content: center; text-align: center; }
+    
+    #galeria img { height: 280px; }
+    
+    .btn-nav { width: 45px; height: 45px; }
+    .btn-prev { left: 5px; } 
+    .btn-next { right: 5px; }
+    
+    .header-container h2.imagem-rotativa { min-width: 100%; }
+
+    .btn-manga-style {
+        padding: 15px 30px;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
